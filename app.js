@@ -1,7 +1,5 @@
 // console.log('hello world');
 
-
-
 const fs = require('fs');
 // read file
 // fs.readFile('file.txt', 'utf-8', function (err, data) {
@@ -10,11 +8,37 @@ const fs = require('fs');
 // });
 
 //file writing
-fs.writeFile(
-    "file.text",
-    "This is testing of file writing",
-    function(error,data){
-        if(error) throw error;
-        console.log("File written successfully");
-    }
-);
+// fs.writeFile(
+//     "file.text",
+//     "This is testing of file writing",
+//     function(error,data){
+//         if(error) throw error;
+//         console.log("File written successfully");
+//     }
+// );
+
+// Creating a web server
+// const http = require('http');
+// http
+//   .createServer(function (req, res) {
+//     res.writeHead(200, { 'Content-Type': 'text/html' });
+//     res.write('Hello World!');
+//     res.end();
+//   })
+//   .listen(8080);
+
+// Making an HTTP request
+const https = require('https');
+https
+  .get('https://jsonplaceholder.typicode.com/posts/1', (resp) => {
+    let data = '';
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+    resp.on('end', () => {
+      console.log(JSON.parse(data));
+    });
+  })
+  .on('error', (err) => {
+    console.log('Error: ' + err.message);
+  });
